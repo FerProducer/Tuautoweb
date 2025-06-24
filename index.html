@@ -8,82 +8,92 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
     body { background-color: #f5f5f5; color: #222; }
+    .hero-image {
+      width: 100%; display: block; animation: fadeIn 1.8s ease forwards; opacity: 0;
+    }
     header {
-      background: url('/mnt/data/492223024_1054426003412778_2445615537949005973_n.png') no-repeat center center/cover;
-      color: #fff;
-      text-align: center;
-      padding: 6rem 1rem;
-      position: relative;
+      color: #fff; text-align: center; padding: 4rem 1rem; background: #111;
+      animation: fadeInDown 1.4s ease forwards; opacity: 0;
     }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 1;
-    }
-    header h1, header p, header a {
-      position: relative;
-      z-index: 2;
-    }
-    header h1 { font-size: 2.5rem; margin-bottom: 1rem; animation: fadeInDown 1.2s ease forwards; opacity: 0; }
-    header p { font-size: 1.2rem; margin-bottom: 1.5rem; animation: fadeIn 2s ease forwards; opacity: 0; }
+    .header-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .header-content p { font-size: 1.2rem; margin-bottom: 1.5rem; }
     .btn {
-      display: inline-block;
-      background-color: #c00;
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      margin: 0.5rem;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: 600;
-      transition: background 0.3s ease;
+      display: inline-block; background-color: #c00; color: #fff;
+      padding: 0.8rem 1.5rem; margin: 0.5rem; text-decoration: none; border-radius: 5px; font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease; animation: fadeInUp 1s ease forwards; opacity: 0;
     }
-    .btn:hover { background-color: #900; }
+    .btn:hover { background-color: #900; transform: scale(1.05); }
+
     .benefits {
-      display: flex; justify-content: center; gap: 1.5rem; padding: 2rem 1rem; flex-wrap: wrap; background-color: #111; color: #fff;
+      display: flex; justify-content: center; gap: 2rem; padding: 2rem 1rem; flex-wrap: wrap;
+      background-color: #111; color: #fff; font-weight: 600; font-size: 1.1rem;
+      animation: fadeInUp 1.6s ease forwards; opacity: 0;
     }
-    .benefit { background: #c00; padding: 1rem; border-radius: 8px; width: 200px; text-align: center; font-weight: 500; animation: fadeInUp 1s ease forwards; opacity: 0; }
-    .inventory, .sell, .contact {
-      padding: 2rem 1rem; max-width: 1200px; margin: auto;
+    .benefit { text-align: center; min-width: 180px; }
+
+    .inventory {
+      padding: 2rem 1rem; max-width: 100%; margin: auto;
+      animation: fadeIn 1.5s ease forwards; opacity: 0;
     }
-    .inventory h2, .sell h2, .contact h2 {
-      font-size: 1.8rem; margin-bottom: 1rem; color: #c00;
+    .inventory h2 {
+      font-size: 1.8rem; margin-bottom: 1rem; color: #c00; text-align: center;
+      animation: fadeInUp 1s ease forwards; opacity: 0;
     }
-    .cars { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .cars {
+      display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+      padding-bottom: 1rem; scrollbar-width: thin; scrollbar-color: #ccc transparent;
+    }
+    .cars::-webkit-scrollbar { height: 8px; }
+    .cars::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
     .car {
-      background: #fff; border-radius: 8px; overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); transform: translateY(30px); opacity: 0;
-      animation: fadeUp 1s ease forwards;
+      flex: 0 0 80%; max-width: 320px; background: #fff; border-radius: 8px; overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); scroll-snap-align: start;
+      animation: fadeUp 1s ease forwards; animation-delay: 0.3s;
     }
-    .car img { width: 100%; height: 180px; object-fit: cover; }
+    .car img {
+      width: 100%; height: 180px; object-fit: cover; transition: transform 0.3s ease;
+    }
+    .car:hover img { transform: scale(1.05); }
     .car-details { padding: 1rem; }
     .car-details h3 { margin-bottom: 0.5rem; }
     .car-details p { font-size: 0.9rem; color: #555; }
     .car-details a {
       margin-top: 0.5rem; display: inline-block; background-color: #25D366;
       color: #fff; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: 600;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
-    .car-details a:hover { background-color: #128C7E; }
+    .car-details a:hover { background-color: #128C7E; transform: scale(1.05); }
+
     form {
-      background: #fff; padding: 1.5rem; border-radius: 8px;
-      display: flex; flex-direction: column; gap: 1rem;
+      background: #fff; padding: 1.5rem; border-radius: 8px; display: flex; flex-direction: column; gap: 1rem;
+      animation: fadeInUp 1.2s ease forwards; opacity: 0;
     }
     input, textarea {
-      padding: 0.8rem; border-radius: 5px; border: 1px solid #ccc;
+      padding: 0.8rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;
     }
     input[type="submit"] {
-      background-color: #c00; color: #fff; font-weight: 600; border: none; cursor: pointer; transition: background 0.3s ease;
+      background-color: #c00; color: #fff; font-weight: 600; border: none; cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
-    input[type="submit"]:hover { background-color: #900; }
-    footer { background: #111; color: #bbb; text-align: center; padding: 1rem; margin-top: 2rem; }
+    input[type="submit"]:hover { background-color: #900; transform: scale(1.05); }
+    .sell, .contact {
+      padding: 2rem 1rem; max-width: 800px; margin: auto; animation: fadeIn 1.5s ease forwards; opacity: 0;
+    }
+    .sell h2, .contact h2 {
+      font-size: 1.8rem; margin-bottom: 1rem; color: #c00; text-align: center;
+    }
+
+    footer {
+      background: #111; color: #bbb; text-align: center; padding: 1rem; margin-top: 2rem;
+      font-size: 0.9rem; user-select: none;
+    }
+
     .whatsapp {
-      position: fixed; bottom: 1rem; right: 1rem;
-      background: #25D366; color: #fff; padding: 0.8rem 1rem; border-radius: 50px;
-      text-decoration: none; font-weight: bold; transition: background 0.3s ease;
+      position: fixed; bottom: 1rem; right: 1rem; width: 56px; height: 56px;
+      cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1000; display: flex; align-items: center; justify-content: center; user-select: none;
     }
-    .whatsapp:hover { background: #128C7E; }
+    .whatsapp:hover { transform: scale(1.1); box-shadow: 0 0 10px #25D366AA; }
 
     @keyframes fadeInDown {
       0% { opacity: 0; transform: translateY(-30px); }
@@ -104,70 +114,100 @@
   </style>
 </head>
 <body>
-  <header>
+
+<img src="https://raw.githubusercontent.com/FerProducer/Tuautoweb/main/492223024_1054426003412778_2445615537949005973_n.png" alt="Imagen principal" class="hero-image">
+
+<header>
+  <div class="header-content">
     <h1>TuAutoCUU</h1>
     <p>Encuentra el seminuevo perfecto o vende el tuyo con nosotros</p>
-    <a href="#inventario" class="btn">Ver inventario disponible</a>
+    <a href="#inventario" class="btn"href="https://ferproducer.github.io/tuautoinventario/">Ver inventario disponible</a>
     <a href="#vende" class="btn">Solicita tu venta por concesión</a>
-  </header>
+  </div>
+</header>
 
-  <section class="benefits">
-    <div class="benefit">✅ Autos verificados</div>
-    <div class="benefit">🤝 Compra directa o por consignación</div>
-    <div class="benefit">📲 Atención personalizada</div>
-  </section>
+<section class="benefits">
+  <div class="benefit">✅ Autos verificados</div>
+  <div class="benefit">🤝 Compra directa o por consignación</div>
+  <div class="benefit">📲 Atención personalizada</div>
+</section>
 
-  <section id="inventario" class="inventory">
-    <h2>Inventario Disponible</h2>
-    <div class="cars">
-      <div class="car">
-        <img src="https://via.placeholder.com/400x200" alt="Auto Seminuevo">
-        <div class="car-details">
-          <h3>Chevrolet Aveo 2020</h3>
-          <p>$185,000 MXN</p>
-          <a href="https://wa.me/5216140000000" target="_blank">Contactar por WhatsApp</a>
-        </div>
-      </div>
-      <div class="car">
-        <img src="https://via.placeholder.com/400x200" alt="Auto Seminuevo">
-        <div class="car-details">
-          <h3>Nissan Versa 2019</h3>
-          <p>$195,000 MXN</p>
-          <a href="https://wa.me/5216140000000" target="_blank">Contactar por WhatsApp</a>
-        </div>
+<section id="inventario" class="inventory">
+  <h2>Inventario Disponible</h2>
+  <div class="cars">
+    <div class="car">
+      <img src="https://raw.githubusercontent.com/FerProducer/Tuautoweb/main/WhatsApp%20Image%202025-06-23%20at%2012.03.19%20PM%20(1).jpeg
+">
+      <div class="car-details">
+        <h3>Nissan Frontier Estacas 2021</h3>
+        <p>$389,000 MXN</p>
+        <a href="https://wa.me/5216142308180" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
       </div>
     </div>
-  </section>
+    <div class="car">
+      <img src="https://raw.githubusercontent.com/FerProducer/Tuautoweb/main/equinox%201.jpeg
+">
+      <div class="car-details">
+        <h3>GMC Terrain Denali 2021</h3>
+        <p>$499,000 MXN</p>
+        <a href="https://wa.me/5216142308180" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
+      </div>
+    </div>
+    <div class="car">
+      <img src="https://raw.githubusercontent.com/FerProducer/Tuautoweb/main/mustang%201.jpeg
+">
+      <div class="car-details">
+        <h3>Ford Mustang Mach 1 2021</h3>
+        <p>$869,000 MXN</p>
+        <a href="https://wa.me/5216142308180" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
+      </div>
+    </div>
+    <div class="car">
+      <img src="https://raw.githubusercontent.com/FerProducer/Tuautoweb/main/explorer%201.jpeg
+">
+      <div class="car-details">
+        <h3>Ford Explorer 2021</h3>
+        <p>$779,000 MXN</p>
+        <a href="https://wa.me/5216142308180" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section id="vende" class="sell">
-    <h2>Vende tu auto por consignación</h2>
-    <p>1. Agenda cita con nosotros<br>2. Revisamos tu auto<br>3. Publicamos y vendemos por ti<br>4. Recibe tu dinero</p>
-    <form action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="_blank">
-      <input type="text" name="entry.NOMBRE" placeholder="Nombre" required>
-      <input type="tel" name="entry.TELEFONO" placeholder="Teléfono" required>
-      <input type="email" name="entry.CORREO" placeholder="Correo electrónico" required>
-      <input type="text" name="entry.AUTO" placeholder="Marca, modelo, año" required>
-      <textarea name="entry.MENSAJE" placeholder="Precio esperado / Detalles adicionales"></textarea>
-      <input type="submit" value="Enviar solicitud">
-    </form>
-  </section>
+<section id="vende" class="sell">
+  <h2>Vende tu auto por consignación</h2>
+  <p>1. Agenda cita con nosotros<br>2. Revisamos tu auto<br>3. Publicamos y vendemos por ti<br>4. Recibe tu dinero</p>
+  <form action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="_blank">
+    <input type="text" name="entry.NOMBRE" placeholder="Nombre" required>
+    <input type="tel" name="entry.TELEFONO" placeholder="Teléfono" required>
+    <input type="email" name="entry.CORREO" placeholder="Correo electrónico" required>
+    <input type="text" name="entry.AUTO" placeholder="Marca, modelo, año" required>
+    <textarea name="entry.MENSAJE" placeholder="Precio esperado / Detalles adicionales"></textarea>
+    <input type="submit" value="Enviar solicitud">
+  </form>
+</section>
 
-  <section class="contact">
-    <h2>Contacto</h2>
-    <p>📍 Chihuahua, México<br>📞 <a href="tel:+526140000000">+52 614 000 0000</a></p>
-    <p><a href="https://facebook.com/Tuautocuu" target="_blank">Visítanos en Facebook</a></p>
-    <form action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="_blank">
-      <input type="text" name="entry.NOMBRE2" placeholder="Nombre" required>
-      <input type="email" name="entry.EMAIL2" placeholder="Correo electrónico" required>
-      <textarea name="entry.MENSAJE2" placeholder="Mensaje"></textarea>
-      <input type="submit" value="Enviar mensaje">
-    </form>
-  </section>
+<section class="contact">
+  <h2>Contacto</h2>
+  <p>📍 Chihuahua, México<br>📞 <a href="tel:+526142308180">+52 614 000 0000</a></p>
+  <p><a href="https://facebook.com/Tuautocuu" target="_blank" rel="noopener noreferrer">Visítanos en Facebook</a></p>
+  <form action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="_blank">
+    <input type="text" name="entry.NOMBRE2" placeholder="Nombre" required>
+    <input type="email" name="entry.EMAIL2" placeholder="Correo electrónico" required>
+    <textarea name="entry.MENSAJE2" placeholder="Mensaje"></textarea>
+    <input type="submit" value="Enviar mensaje">
+  </form>
+</section>
 
-  <a href="https://wa.me/5216140000000" class="whatsapp" target="_blank">WhatsApp</a>
+<a href="https://wa.me/5216140000000" class="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" role="img">
+    <circle cx="12" cy="12" r="12" fill="#25D366"/>
+    <path fill="white" d="M20.52 3.48A11.9 11.9 0 0 0 3.48 20.52l-1.4 4.9 4.93-1.27a11.9 11.9 0 0 0 7.47 2.32c6.59 0 11.95-5.36 11.95-11.95 0-3.18-1.24-6.17-3.48-8.42Zm-9.5 15.27c-2.42 0-4.59-1.1-6.04-2.85l-.44-.53-2.69.69.71-2.61-.45-.56a8.48 8.48 0 0 1-1.3-4.65c0-4.68 3.8-8.48 8.48-8.48a8.45 8.45 0 0 1 6.01 2.49 8.41 8.41 0 0 1 2.48 6.01c0 4.67-3.8 8.47-8.48 8.47Zm4.59-6.21c-.25-.13-1.48-.73-1.71-.81-.23-.08-.39.13-.55.13-.17.25-.65.81-.8.98-.15.17-.3.2-.55.07-.25-.13-1.05-.38-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.5.11-.11.25-.3.37-.45.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.55-1.32-.75-1.8-.2-.47-.4-.41-.55-.42-.14-.01-.3-.01-.46-.01-.15 0-.41.06-.62.31-.22.25-.83.81-.83 1.97s.85 2.29.97 2.45c.13.17 1.67 2.55 4.05 3.58.57.25 1.01.4 1.36.51.57.18 1.09.15 1.5.09.46-.07 1.48-.6 1.69-1.18.21-.58.21-1.08.15-1.18-.07-.1-.25-.16-.5-.29Z"/>
+  </svg>
+</a>
 
-  <footer>
-    © 2025 TuAutoCUU | Sitio desarrollado por ZOMOZ Studio
-  </footer>
+<footer>© 2025 TuAutoCUU | Sitio desarrollado por ZOMOZ Studio</footer>
+
 </body>
 </html>
+
